@@ -1,0 +1,42 @@
+---
+title: "README file for the cereal dataset"
+author: "Cherin-Juliette"
+date: '2022-05-17'
+output: html_document
+---
+
+<br>
+
+# Comparing the Sugar and Sodium content of 80 types of cereals
+
+## Analysis
+With the cereal data set I make:
++ *An animated bar* chart of the mean sugar and sodium content from 7 cereal manufacturers. <br>
++ *An interactive bar* chart of the sugar and sodium content of the 80 cereals. <br>
++ A *User Defined Function* that returns the nutritional values of a cereal.
+
+## Data collection
+The dataset that is used for this R analysis is retrieved from [this Kaggle webpage](https://www.kaggle.com/datasets/crawford/80-cereals).
+
+## Sources used
+All sources are noted in the references.bib file
+
+## Methodolody/ Code
+All code which I wrote to do this analysis may be found in [this HTML file]() as well as the RMarkdown file.
+
+## R version in use
+R version 4.2.0 
+
+
+## Package versions
+The version of the following packages have been used to do this analysis:
+rmarkdown_2.14 
+plotly_4.10.0.9001
+ggtext_0.1.1 
+DT_0.23
+here_1.0.1
+gganimate_1.0.7.9000
+readxl_1.4.0
+RColorBrewer_1.1-3
+devtools_2.4.3
+tidyverse_1.3.1
