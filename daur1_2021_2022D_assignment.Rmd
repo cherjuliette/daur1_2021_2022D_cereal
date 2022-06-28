@@ -37,6 +37,7 @@ During the evening however, when the sound of rain fills your ears and the fur o
 
 ```{r setup, class.source="p", warning=FALSE, message=FALSE}
 ## Load required packages
+if (!require(rcolorUtrecht)) install.packages("rcolorUtrecht")
 if (!require(tidyverse)) install.packages("tidyverse")
 if (!require(tidytext)) install.packages("tidytext")    #tidy data of text files
 if (!require(ggplot2)) install.packages("ggplot2")      # data visualization with plots
@@ -52,15 +53,15 @@ if (!require(DT)) install.packages("DT")                #interactive tables
 
 ## installation of devtools is necessary prior to installing the following packages
 
-devtools::install_github("thomasp85/gganimate")         #makes gif-like graphs
+#devtools::install_github("thomasp85/gganimate")         #makes gif-like graphs
 library(gganimate)
-devtools::install_github("thomasp85/patchwork")         #allows for combining graphs
+#devtools::install_github("thomasp85/patchwork")         #allows for combining graphs
 library(patchwork)
-devtools::install_github("ropensci/plotly")             #interactive graphs
+#devtools::install_github("ropensci/plotly")             #interactive graphs
 library(plotly)
 
 ## installation of remotes is necessary prior to installing the following package
-remotes::install_github("wilkelab/ggtext")              #customization of graph text using HTML rendering
+#remotes::install_github("wilkelab/ggtext")              #customization of graph text using HTML rendering
 library(ggtext)
 ```
 
@@ -68,9 +69,7 @@ library(ggtext)
 # **1. Data import**
 ```{r data import, class.source="p", echo=TRUE, message=FALSE}
 ## Load in the dataset using the tidyverse function read_csv()
-cereal = read.csv(here::here("0_data",
-                             "raw_data",
-                             "cereal.csv"))
+cereal <- read.csv(here::here("raw_data/cereal.csv"))
 ```
 
 <br>
@@ -237,7 +236,7 @@ Now that we asked the question is there a significant difference between the 7 m
 I do this by using the ggplot2 package as well as gganimate to turn the plots into a gif.
 
 ```{r sugar plot, class.source="p", include=FALSE, warning=FALSE, fig.cap="Graph 1: Barchart of the 7 cereal manufacturers and their sugar content"}
-sugar_plot = cereal_tbl %>% 
+sugar_plot <- cereal_tbl %>% 
                            select(manufacturer, type, sugars_g) %>% 
                            group_by(manufacturer) %>% 
   
@@ -261,10 +260,7 @@ sugar_plot = cereal_tbl %>%
        caption = "Data source: James R. Eagan from https://perso.telecom-paristech.fr/eagan/")+
   
   ##choose a graph theme
-  theme_classic()+
-  
-  ##choose a color palette
-  scale_fill_brewer(palette = "Purples")+
+  theme_minimal()+
   
   ##Color of the text
   theme(text = element_text(family = "Lora", colour = "#3C1361"),
@@ -275,15 +271,18 @@ sugar_plot = cereal_tbl %>%
   
   ##font size
         plot.title = element_text(size = 15),
-        axis.text.x = element_text(size = 8.5))+
+        axis.text.x = element_text(size = 8.5)) +
   
   ##put values above the bars
-  geom_text(mapping=aes(label=mean),
+  geom_text(mapping  = aes(label=mean),
             position = position_dodge(width=0.9),
-            cex=2.0,
-            vjust=-0.5,
-            size=7,
-            color="black")
+            cex      = 2.0,
+            vjust    = -0.5,
+            size     = 7,
+            color    = "black") +
+  
+  scale_fill_rcolorUtrecht(palette = "miffy")
+  
 
 ##turn the plot into a gif
 sugar = sugar_plot + 
@@ -340,7 +339,8 @@ sodium_plot = cereal_tbl %>%
             cex=2.0,
             vjust=-0.5,
             size=10,
-            color="black")
+            color="black") +
+  scale_fill_rcolorUtrecht(palette = "miffy")
 
 ##turn the plot into a gif
 sodium = sodium_plot + 
@@ -367,9 +367,9 @@ sugar_80 <- cereal_tbl %>%
                   x = "Sugar (g)",
                   y = "Cereal names") +
             coord_flip() +
-            theme_dark()
-            facet_wrap(~manufacturer)
-
+            theme_minimal() +
+  scale_fill_rcolorUtrecht(palette = "microscope")
+  theme(legend.position = "none")
 ## make the graph interactive
 ggplotly(sugar_80)
 ```
@@ -388,7 +388,9 @@ sodium_80 <- cereal_tbl %>%
                   x = "Sodium (mg)",
                   y = "Cereal names") +
              coord_flip() +
-             theme_dark()
+             theme_minimal() +
+  scale_fill_rcolorUtrecht(palette = "microscope")+
+  theme(legend.position = "none")
 
 ## if you're brave you can make a different plot for every manufacturers and their cereal brands
              facet_wrap(~manufacturer)
@@ -502,15 +504,15 @@ At the beginning of this analysis we found that the Shapiro-Wilk test determined
 .list-group-item.active, .list-group-item.active:hover, .list-group-item.active:focus {
     z-index: 2;
     color: #ffffff;
-    background-color: #9166A1;
-    border-color: #9166A1;
+    background-color: #edc9af;
+    border-color: #edc9af;
 }
 
 .list-group-item.active, .list-group-item.active, .list-group-item.active:focus {
     z-index: 2;
     color: #ffffff;
-    background-color: #9166A1;
-    border-color: #9166A1;
+    background-color: #edc9af;
+    border-color: #edc9afs;
 }
 
 body {
@@ -526,8 +528,8 @@ body {
 ```{css}
 <!--Color of the h1 header-->
 .columns {display: flex;}
-h1 {color: #9166A1;}
-.p {background-color: #CFB0CF;}
+h1 {color: #000000;}
+.p {background-color: #edc9af;}
 ```
 
 
